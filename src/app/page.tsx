@@ -1,9 +1,9 @@
-import Products from "@/components/Products";
+import Repos from "@/components/Repos";
 
 export default function Home() {
   return (
-    <main className="">
-      <Products />
+    <main>
+      <Repos />
     </main>
   );
 }
