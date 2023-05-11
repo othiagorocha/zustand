@@ -1,14 +1,15 @@
 'use client';
 import { api } from '@/services/api';
-import { useQuery } from '@tanstack/react-query';
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import { Repo } from './types';
 
-async function getRepos() {
-  const { data } = await api.get<Repo[]>(`/users/CarlosLevir/repos`);
+async function getRepos(ctx: QueryFunctionContext) {
+  const [, userId] = ctx.queryKey
+  const { data } = await api.get<Repo[]>(`/users/${userId}/repos`);
 
   return data
 }
 
-export function useFetchRepos() {
-  return useQuery(['repos'], getRepos);
+export function useFetchRepos(userId: string) {
+  return useQuery(['repos', userId], getRepos);
 }
